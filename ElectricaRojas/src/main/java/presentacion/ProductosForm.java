@@ -319,10 +319,6 @@ public class ProductosForm extends JFrame {
         dispose();
     }
 
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> new ProductosForm().setVisible(true));
-    }
-
     private class ProductoDialog extends JDialog {
 
         private JTextField txtNombre;

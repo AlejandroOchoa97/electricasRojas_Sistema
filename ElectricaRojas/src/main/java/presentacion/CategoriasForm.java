@@ -292,10 +292,6 @@ public class CategoriasForm extends JFrame {
         dispose();
     }
 
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> new CategoriasForm().setVisible(true));
-    }
-
     private class CategoriaDialog extends JDialog {
 
         private JTextField txtNombre;

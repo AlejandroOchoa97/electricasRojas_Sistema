@@ -135,16 +135,6 @@ public class LoginForm extends JFrame {
         dispose();
     }
 
-    public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            System.out.println("No se pudo aplicar look and feel: " + e.getMessage());
-        }
-
-        java.awt.EventQueue.invokeLater(() -> new LoginForm().setVisible(true));
-    }
-
     private static class FondoPanel extends JPanel {
 
         @Override

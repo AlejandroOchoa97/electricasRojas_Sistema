@@ -221,10 +221,6 @@ public class MenuPrincipal extends JFrame {
         JOptionPane.showMessageDialog(this, formulario + " se desarrollara en el siguiente paso.");
     }
 
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> new MenuPrincipal().setVisible(true));
-    }
-
     private static class EncabezadoPanel extends JPanel {
 
         @Override

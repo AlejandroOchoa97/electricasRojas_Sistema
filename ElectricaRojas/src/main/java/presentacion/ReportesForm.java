@@ -461,7 +461,4 @@ public class ReportesForm extends JFrame {
         dispose();
     }
 
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> new ReportesForm().setVisible(true));
-    }
 }
