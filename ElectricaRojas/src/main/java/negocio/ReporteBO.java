@@ -1,0 +1,75 @@
+package negocio;
+
+import java.util.List;
+import persistencia.ReporteDAO;
+
+public class ReporteBO {
+
+    private ReporteDAO reporteDAO;
+
+    public ReporteBO() {
+        reporteDAO = new ReporteDAO();
+    }
+
+    public List<String> reporteInventarioGeneral() {
+        return reporteDAO.reporteInventarioGeneral();
+    }
+
+    public List<Object[]> reporteInventarioGeneralTabla() {
+        return reporteDAO.reporteInventarioGeneralTabla();
+    }
+
+    public List<String> reporteProductosBajoStock(int stockMinimo) {
+        if (stockMinimo < 0) {
+            System.out.println("El stock minimo no puede ser negativo.");
+            stockMinimo = 0;
+        }
+
+        return reporteDAO.reporteProductosBajoStock(stockMinimo);
+    }
+
+    public List<Object[]> reporteProductosBajoStockTabla(int stockMinimo) {
+        if (stockMinimo < 0) {
+            System.out.println("El stock minimo no puede ser negativo.");
+            stockMinimo = 0;
+        }
+
+        return reporteDAO.reporteProductosBajoStockTabla(stockMinimo);
+    }
+
+    public List<String> reporteVentas() {
+        return reporteDAO.reporteVentas();
+    }
+
+    public List<Object[]> reporteVentasTabla() {
+        return reporteDAO.reporteVentasTabla();
+    }
+
+    public List<Object[]> reporteVentasTabla(String fechaInicio, String fechaFin) {
+        return reporteDAO.reporteVentasTabla(fechaInicio, fechaFin);
+    }
+
+    public List<String> reporteProductosMasVendidos() {
+        return reporteDAO.reporteProductosMasVendidos();
+    }
+
+    public List<Object[]> reporteProductosMasVendidosTabla() {
+        return reporteDAO.reporteProductosMasVendidosTabla();
+    }
+
+    public List<Object[]> reporteProductosMasVendidosTabla(String fechaInicio, String fechaFin) {
+        return reporteDAO.reporteProductosMasVendidosTabla(fechaInicio, fechaFin);
+    }
+
+    public List<String> reporteMermas() {
+        return reporteDAO.reporteMermas();
+    }
+
+    public List<Object[]> reporteMermasTabla() {
+        return reporteDAO.reporteMermasTabla();
+    }
+
+    public List<Object[]> reporteMermasTabla(String fechaInicio, String fechaFin) {
+        return reporteDAO.reporteMermasTabla(fechaInicio, fechaFin);
+    }
+}

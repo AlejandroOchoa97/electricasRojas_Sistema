@@ -1,7 +1,5 @@
 package presentacion;
 
-import entidad.Categoria;
-import entidad.Producto;
 import entidad.Usuario;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,7 +10,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -30,40 +27,32 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.table.DefaultTableModel;
-import negocio.CategoriaBO;
-import negocio.ProductoBO;
+import negocio.UsuarioBO;
 
-public class ProductosForm extends JFrame {
+public class UsuariosForm extends JFrame {
 
     private JTextField txtBuscar;
-    private JTable tablaProductos;
+    private JTable tablaUsuarios;
     private DefaultTableModel modeloTabla;
-    private JButton btnAgregar;
-    private JButton btnEditar;
-    private JButton btnEliminar;
+    private List<Usuario> usuariosActuales;
+    private UsuarioBO usuarioBO;
+    private Usuario usuarioSesion;
 
-    private ProductoBO productoBO;
-    private CategoriaBO categoriaBO;
-    private Usuario usuario;
-    private List<Producto> productosActuales;
-
-    public ProductosForm() {
+    public UsuariosForm() {
         this(null);
     }
 
-    public ProductosForm(Usuario usuario) {
-        this.usuario = usuario;
-        productoBO = new ProductoBO();
-        categoriaBO = new CategoriaBO();
-        productosActuales = new ArrayList<>();
+    public UsuariosForm(Usuario usuarioSesion) {
+        this.usuarioSesion = usuarioSesion;
+        usuarioBO = new UsuarioBO();
+        usuariosActuales = new ArrayList<>();
         configurarVentana();
         construirFormulario();
-        configurarPermisos();
-        cargarProductos();
+        cargarUsuarios();
     }
 
     private void configurarVentana() {
-        setTitle("ElectricaRojas - Productos");
+        setTitle("ElectricaRojas - Usuarios");
         setSize(1200, 760);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -87,13 +76,13 @@ public class ProductosForm extends JFrame {
         btnRegresar.addActionListener(e -> volverAlMenu());
         marca.add(btnRegresar, BorderLayout.WEST);
 
-        JLabel lblTitulo = new JLabel("Productos");
+        JLabel lblTitulo = new JLabel("Usuarios");
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 28));
         lblTitulo.setForeground(Color.WHITE);
         marca.add(lblTitulo, BorderLayout.CENTER);
         encabezado.add(marca, BorderLayout.WEST);
 
-        JLabel lblModulo = new JLabel("Inventario");
+        JLabel lblModulo = new JLabel("Administracion de accesos");
         lblModulo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         lblModulo.setForeground(new Color(224, 240, 255));
         encabezado.add(lblModulo, BorderLayout.EAST);
@@ -117,8 +106,8 @@ public class ProductosForm extends JFrame {
 
         JButton btnBuscar = crearBoton("Buscar", new Color(18, 139, 226));
         JButton btnTodos = crearBoton("Ver todos", new Color(96, 125, 139));
-        btnBuscar.addActionListener(e -> buscarProductos());
-        btnTodos.addActionListener(e -> cargarProductos());
+        btnBuscar.addActionListener(e -> buscarUsuarios());
+        btnTodos.addActionListener(e -> cargarUsuarios());
 
         botonesBusqueda.add(btnBuscar);
         botonesBusqueda.add(btnTodos);
@@ -127,7 +116,7 @@ public class ProductosForm extends JFrame {
         contenido.add(barraSuperior, BorderLayout.NORTH);
 
         modeloTabla = new DefaultTableModel(
-                new Object[]{"Nombre", "Descripcion", "Precio", "Stock", "Categoria"}, 0
+                new Object[]{"Nombre", "Usuario", "Password", "Rol"}, 0
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -135,16 +124,16 @@ public class ProductosForm extends JFrame {
             }
         };
 
-        tablaProductos = new JTable(modeloTabla);
-        tablaProductos.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        tablaProductos.setRowHeight(32);
-        tablaProductos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tablaProductos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
-        tablaProductos.getTableHeader().setBackground(new Color(235, 241, 250));
-        tablaProductos.getTableHeader().setForeground(new Color(37, 44, 76));
-        tablaProductos.setGridColor(new Color(230, 235, 244));
+        tablaUsuarios = new JTable(modeloTabla);
+        tablaUsuarios.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        tablaUsuarios.setRowHeight(32);
+        tablaUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tablaUsuarios.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
+        tablaUsuarios.getTableHeader().setBackground(new Color(235, 241, 250));
+        tablaUsuarios.getTableHeader().setForeground(new Color(37, 44, 76));
+        tablaUsuarios.setGridColor(new Color(230, 235, 244));
 
-        JScrollPane scroll = new JScrollPane(tablaProductos);
+        JScrollPane scroll = new JScrollPane(tablaUsuarios);
         scroll.setBorder(BorderFactory.createLineBorder(new Color(224, 229, 238)));
         contenido.add(scroll, BorderLayout.CENTER);
 
@@ -154,13 +143,13 @@ public class ProductosForm extends JFrame {
         JPanel accionesIzquierda = new JPanel(new GridLayout(1, 3, 12, 0));
         accionesIzquierda.setOpaque(false);
 
-        btnAgregar = crearBoton("Agregar", new Color(29, 172, 125));
-        btnEditar = crearBoton("Editar", new Color(18, 139, 226));
-        btnEliminar = crearBoton("Eliminar", new Color(239, 83, 80));
+        JButton btnAgregar = crearBoton("Agregar", new Color(18, 139, 226));
+        JButton btnEditar = crearBoton("Editar", new Color(18, 139, 226));
+        JButton btnEliminar = crearBoton("Eliminar", new Color(239, 83, 80));
 
         btnAgregar.addActionListener(e -> abrirAgregar());
-        btnEditar.addActionListener(e -> editarProducto());
-        btnEliminar.addActionListener(e -> eliminarProducto());
+        btnEditar.addActionListener(e -> editarUsuario());
+        btnEliminar.addActionListener(e -> eliminarUsuario());
 
         accionesIzquierda.add(btnAgregar);
         accionesIzquierda.add(btnEditar);
@@ -169,14 +158,6 @@ public class ProductosForm extends JFrame {
         barraAcciones.add(accionesIzquierda, BorderLayout.WEST);
 
         contenido.add(barraAcciones, BorderLayout.SOUTH);
-    }
-
-    private void configurarPermisos() {
-        if (usuario != null && "VENDEDOR".equals(usuario.getRol())) {
-            btnAgregar.setEnabled(false);
-            btnEditar.setEnabled(false);
-            btnEliminar.setEnabled(false);
-        }
     }
 
     private JTextField crearCampo() {
@@ -207,61 +188,59 @@ public class ProductosForm extends JFrame {
         return boton;
     }
 
-    private void cargarProductos() {
+    private void cargarUsuarios() {
         txtBuscar.setText("");
-        llenarTabla(productoBO.listarProductos());
+        llenarTabla(usuarioBO.listarUsuarios());
     }
 
-    private void buscarProductos() {
-        String nombre = txtBuscar.getText().trim();
-        llenarTabla(productoBO.buscarProductoPorNombre(nombre));
+    private void buscarUsuarios() {
+        llenarTabla(usuarioBO.buscarUsuarioPorNombre(txtBuscar.getText().trim()));
     }
 
-    private void llenarTabla(List<Producto> productos) {
-        productosActuales = productos;
+    private void llenarTabla(List<Usuario> usuarios) {
+        usuariosActuales = usuarios;
         modeloTabla.setRowCount(0);
 
-        for (Producto producto : productosActuales) {
+        for (Usuario usuario : usuariosActuales) {
             modeloTabla.addRow(new Object[]{
-                producto.getNombre(),
-                producto.getDescripcion(),
-                producto.getPrecio(),
-                producto.getStock(),
-                producto.getNombreCategoria()
+                usuario.getNombre(),
+                usuario.getUsuario(),
+                "********",
+                usuario.getRol()
             });
         }
     }
 
-    private Producto obtenerProductoSeleccionado() {
-        int fila = tablaProductos.getSelectedRow();
+    private Usuario obtenerUsuarioSeleccionado() {
+        int fila = tablaUsuarios.getSelectedRow();
 
         if (fila < 0) {
-            JOptionPane.showMessageDialog(this, "Selecciona un producto de la lista.");
+            JOptionPane.showMessageDialog(this, "Selecciona un usuario de la lista.");
             return null;
         }
 
-        return productosActuales.get(fila);
+        return usuariosActuales.get(fila);
     }
 
     private void abrirAgregar() {
-        ProductoDialog dialogo = new ProductoDialog(this, null);
+        UsuarioDialog dialogo = new UsuarioDialog(this, null);
         dialogo.setVisible(true);
 
         if (dialogo.isGuardado()) {
-            cargarProductos();
+            cargarUsuarios();
         }
     }
 
-    private void editarProducto() {
-        Producto producto = obtenerProductoSeleccionado();
+    private void editarUsuario() {
+        Usuario usuario = obtenerUsuarioSeleccionado();
 
-        if (producto == null) {
+        if (usuario == null) {
             return;
         }
 
         int respuesta = JOptionPane.showOptionDialog(
                 this,
-                "Se editara el producto seleccionado. Deseas continuar?",
+                "Se editara el usuario seleccionado. Deseas continuar?",
                 "Confirmar edicion",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
@@ -274,24 +253,29 @@ public class ProductosForm extends JFrame {
             return;
         }
 
-        ProductoDialog dialogo = new ProductoDialog(this, producto);
+        UsuarioDialog dialogo = new UsuarioDialog(this, usuario);
         dialogo.setVisible(true);
 
         if (dialogo.isGuardado()) {
-            cargarProductos();
+            cargarUsuarios();
         }
     }
 
-    private void eliminarProducto() {
-        Producto producto = obtenerProductoSeleccionado();
+    private void eliminarUsuario() {
+        Usuario usuario = obtenerUsuarioSeleccionado();
 
-        if (producto == null) {
+        if (usuario == null) {
+            return;
+        }
+
+        if (usuarioSesion != null && usuario.getIdUsuario() == usuarioSesion.getIdUsuario()) {
+            JOptionPane.showMessageDialog(this, "No puedes eliminar el usuario con sesion activa.");
             return;
         }
 
         int respuesta = JOptionPane.showOptionDialog(
                 this,
-                "Se eliminara el producto seleccionado. Deseas continuar?",
+                "Se eliminara el usuario seleccionado. Deseas continuar?",
                 "Confirmar eliminacion",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE,
@@ -304,48 +288,42 @@ public class ProductosForm extends JFrame {
             return;
         }
 
-        if (productoBO.eliminarProducto(producto.getIdProducto())) {
-            JOptionPane.showMessageDialog(this, "Producto eliminado correctamente.");
-            cargarProductos();
+        if (usuarioBO.eliminarUsuario(usuario.getIdUsuario())) {
+            JOptionPane.showMessageDialog(this, "Usuario eliminado correctamente.");
+            cargarUsuarios();
         } else {
-            JOptionPane.showMessageDialog(this, "No se pudo eliminar el producto. Verifica que no tenga ventas o mermas registradas.");
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar el usuario. Verifica que no tenga ventas registradas.");
         }
     }
 
     private void volverAlMenu() {
-        if (usuario != null) {
-            new MenuPrincipal(usuario).setVisible(true);
+        if (usuarioSesion != null) {
+            new MenuPrincipal(usuarioSesion).setVisible(true);
         }
         dispose();
     }
 
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> new ProductosForm().setVisible(true));
-    }
-
-    private class ProductoDialog extends JDialog {
+    private class UsuarioDialog extends JDialog {
 
         private JTextField txtNombre;
-        private JTextField txtDescripcion;
-        private JTextField txtPrecio;
-        private JTextField txtStock;
-        private JComboBox<Object> cboCategoria;
-        private Producto productoEditar;
+        private JTextField txtUsuario;
+        private JTextField txtPassword;
+        private JComboBox<String> cboRol;
+        private Usuario usuarioEditar;
         private boolean guardado;
 
-        public ProductoDialog(JFrame padre, Producto productoEditar) {
+        public UsuarioDialog(JFrame padre, Usuario usuarioEditar) {
             super(padre, true);
-            this.productoEditar = productoEditar;
+            this.usuarioEditar = usuarioEditar;
             configurarDialogo();
             construirDialogo();
-            cargarCategorias();
             cargarDatos();
         }
 
         private void configurarDialogo() {
-            setTitle(productoEditar == null ? "Agregar producto" : "Editar producto");
-            setSize(470, 500);
-            setLocationRelativeTo(ProductosForm.this);
+            setTitle(usuarioEditar == null ? "Agregar usuario" : "Editar usuario");
+            setSize(470, 450);
+            setLocationRelativeTo(UsuariosForm.this);
             setResizable(false);
         }
 
@@ -358,12 +336,12 @@ public class ProductosForm extends JFrame {
             encabezado.setBackground(new Color(18, 139, 226));
             encabezado.setBorder(BorderFactory.createEmptyBorder(20, 28, 20, 28));
 
-            JLabel titulo = new JLabel(productoEditar == null ? "Agregar producto" : "Editar producto");
+            JLabel titulo = new JLabel(usuarioEditar == null ? "Agregar usuario" : "Editar usuario");
             titulo.setFont(new Font("Segoe UI", Font.BOLD, 22));
             titulo.setForeground(Color.WHITE);
             encabezado.add(titulo, BorderLayout.WEST);
 
-            JLabel subtitulo = new JLabel("Inventario");
+            JLabel subtitulo = new JLabel("Accesos");
             subtitulo.setFont(new Font("Segoe UI", Font.PLAIN, 13));
             subtitulo.setForeground(new Color(224, 240, 255));
             encabezado.add(subtitulo, BorderLayout.EAST);
@@ -378,19 +356,17 @@ public class ProductosForm extends JFrame {
             ));
 
             txtNombre = crearCampoDialogo();
-            txtDescripcion = crearCampoDialogo();
-            txtPrecio = crearCampoDialogo();
-            txtStock = crearCampoDialogo();
-            cboCategoria = new JComboBox<>();
-            cboCategoria.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-            cboCategoria.setPreferredSize(new Dimension(330, 34));
+            txtUsuario = crearCampoDialogo();
+            txtPassword = crearCampoDialogo();
+            cboRol = new JComboBox<>(new String[]{"Seleccionar", "ADMIN", "VENDEDOR"});
+            cboRol.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+            cboRol.setPreferredSize(new Dimension(330, 34));
 
             int fila = 0;
             agregarCampoDialogo(campos, "Nombre", txtNombre, fila++);
-            agregarCampoDialogo(campos, "Descripcion", txtDescripcion, fila++);
-            agregarCampoDialogo(campos, "Precio", txtPrecio, fila++);
-            agregarCampoDialogo(campos, "Stock", txtStock, fila++);
-            agregarCampoDialogo(campos, "Categoria", cboCategoria, fila++);
+            agregarCampoDialogo(campos, "Usuario", txtUsuario, fila++);
+            agregarCampoDialogo(campos, "Password", txtPassword, fila++);
+            agregarCampoDialogo(campos, "Rol", cboRol, fila++);
 
             JPanel cuerpo = new JPanel(new BorderLayout());
             cuerpo.setOpaque(false);
@@ -402,7 +378,7 @@ public class ProductosForm extends JFrame {
             botones.setOpaque(false);
             botones.setBorder(BorderFactory.createEmptyBorder(0, 28, 24, 28));
 
-            JButton btnGuardar = crearBoton("Guardar", new Color(29, 172, 125));
+            JButton btnGuardar = crearBoton("Guardar", new Color(18, 139, 226));
             JButton btnCancelar = crearBoton("Cancelar", new Color(96, 125, 139));
 
             btnGuardar.addActionListener(e -> guardar());
@@ -439,100 +415,48 @@ public class ProductosForm extends JFrame {
 
             gbc.gridy = fila * 2 + 1;
             gbc.fill = GridBagConstraints.HORIZONTAL;
-            gbc.insets = new Insets(0, 0, 8, 0);
+            gbc.weightx = 1.0;
+            gbc.insets = new Insets(0, 0, 10, 0);
             panel.add(componente, gbc);
         }
 
-        private void cargarCategorias() {
-            DefaultComboBoxModel<Object> modelo = new DefaultComboBoxModel<>();
-            modelo.addElement("Seleccionar");
-
-            for (Categoria categoria : categoriaBO.listarCategorias()) {
-                modelo.addElement(categoria);
-            }
-
-            cboCategoria.setModel(modelo);
-            cboCategoria.setRenderer((lista, valor, indice, seleccionado, enfocado) -> {
-                JLabel etiqueta = new JLabel();
-                etiqueta.setOpaque(true);
-                etiqueta.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-                etiqueta.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
-
-                if (valor instanceof Categoria) {
-                    etiqueta.setText(((Categoria) valor).getNombre());
-                } else if (valor != null) {
-                    etiqueta.setText(valor.toString());
-                }
-
-                etiqueta.setBackground(seleccionado ? new Color(18, 139, 226) : Color.WHITE);
-                etiqueta.setForeground(seleccionado ? Color.WHITE : new Color(37, 44, 76));
-                return etiqueta;
-            });
-        }
-
         private void cargarDatos() {
-            if (productoEditar == null) {
+            if (usuarioEditar == null) {
                 return;
             }
 
-            txtNombre.setText(productoEditar.getNombre());
-            txtDescripcion.setText(productoEditar.getDescripcion());
-            txtPrecio.setText(String.valueOf(productoEditar.getPrecio()));
-            txtStock.setText(String.valueOf(productoEditar.getStock()));
-            seleccionarCategoria(productoEditar.getIdCategoria());
-        }
-
-        private void seleccionarCategoria(int idCategoria) {
-            for (int i = 0; i < cboCategoria.getItemCount(); i++) {
-                Object item = cboCategoria.getItemAt(i);
-                if (item instanceof Categoria && ((Categoria) item).getIdCategoria() == idCategoria) {
-                    cboCategoria.setSelectedIndex(i);
-                    return;
-                }
-            }
+            txtNombre.setText(usuarioEditar.getNombre());
+            txtUsuario.setText(usuarioEditar.getUsuario());
+            txtPassword.setText(usuarioEditar.getPassword());
+            cboRol.setSelectedItem(usuarioEditar.getRol());
         }
 
         private void guardar() {
-            try {
-                Object itemCategoria = cboCategoria.getSelectedItem();
+            Usuario usuario = new Usuario();
 
-                if (!(itemCategoria instanceof Categoria)) {
-                    JOptionPane.showMessageDialog(this, "Selecciona una categoria.");
-                    return;
-                }
-                
-                Categoria categoria = (Categoria) itemCategoria;
+            if (usuarioEditar != null) {
+                usuario.setIdUsuario(usuarioEditar.getIdUsuario());
+            }
 
-                Producto producto = new Producto();
+            usuario.setNombre(txtNombre.getText().trim());
+            usuario.setUsuario(txtUsuario.getText().trim());
+            usuario.setPassword(txtPassword.getText().trim());
+            usuario.setRol(cboRol.getSelectedItem().toString());
 
-                if (productoEditar != null) {
-                    producto.setIdProducto(productoEditar.getIdProducto());
-                }
+            boolean resultado;
 
-                producto.setNombre(txtNombre.getText().trim());
-                producto.setDescripcion(txtDescripcion.getText().trim());
-                producto.setPrecio(new BigDecimal(txtPrecio.getText().trim()));
-                producto.setStock(Integer.parseInt(txtStock.getText().trim()));
-                producto.setIdCategoria(categoria.getIdCategoria());
+            if (usuarioEditar == null) {
+                resultado = usuarioBO.insertarUsuario(usuario);
+            } else {
+                resultado = usuarioBO.actualizarUsuario(usuario);
+            }
 
-                boolean resultado;
-
-                if (productoEditar == null) {
-                    resultado = productoBO.insertarProducto(producto);
-                } else {
-                    resultado = productoBO.actualizarProducto(producto);
-                }
-
-                if (resultado) {
-                    JOptionPane.showMessageDialog(this, "Producto guardado correctamente.");
-                    guardado = true;
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this, "No se pudo guardar el producto.");
-                }
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Verifica precio y stock. Deben ser numeros validos.");
+            if (resultado) {
+                JOptionPane.showMessageDialog(this, "Usuario guardado correctamente.");
+                guardado = true;
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo guardar el usuario. Verifica los datos o que el usuario no este duplicado.");
             }
         }
 

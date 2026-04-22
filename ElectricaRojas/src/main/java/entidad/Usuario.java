@@ -14,6 +14,7 @@ public class Usuario {
     private String nombre;
     private String usuario;
     private String password;
+    private String rol;
 
     public Usuario(int idUsuario, String nombre, String usuario, String password) {
         this.idUsuario = idUsuario;
@@ -22,6 +23,13 @@ public class Usuario {
         this.password = password;
     }
 
+    public Usuario(int idUsuario, String nombre, String usuario, String password, String rol) {
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.usuario = usuario;
+        this.password = password;
+        this.rol = rol;
+    }
 
     public Usuario() {
     }
@@ -56,5 +64,18 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nombre=" + nombre + ", usuario=" + usuario + ", rol=" + rol + '}';
     }
 }

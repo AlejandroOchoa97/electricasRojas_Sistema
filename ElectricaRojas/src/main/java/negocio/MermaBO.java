@@ -4,10 +4,55 @@
  */
 package negocio;
 
+import entidad.Merma;
+import java.util.List;
+import persistencia.MermaDAO;
+
 /**
  *
  * @author aleja
  */
 public class MermaBO {
-    
+
+    private MermaDAO mermaDAO;
+
+    public MermaBO() {
+        mermaDAO = new MermaDAO();
+    }
+
+    public boolean registrarMerma(Merma merma) {
+        if (!validarMerma(merma)) {
+            return false;
+        }
+
+        return mermaDAO.registrarMerma(merma);
+    }
+
+    public List<Merma> listarMermas() {
+        return mermaDAO.listarMermas();
+    }
+
+    private boolean validarMerma(Merma merma) {
+        if (merma == null) {
+            System.out.println("La merma no puede ser nula.");
+            return false;
+        }
+
+        if (merma.getIdProducto() <= 0) {
+            System.out.println("El producto de la merma no es valido.");
+            return false;
+        }
+
+        if (merma.getCantidad() <= 0) {
+            System.out.println("La cantidad debe ser mayor a cero.");
+            return false;
+        }
+
+        if (merma.getMotivo() == null || merma.getMotivo().trim().isEmpty()) {
+            System.out.println("El motivo de la merma es obligatorio.");
+            return false;
+        }
+
+        return true;
+    }
 }
