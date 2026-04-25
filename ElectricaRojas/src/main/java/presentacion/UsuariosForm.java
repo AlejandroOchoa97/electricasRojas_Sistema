@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package presentacion;
 
 import entidad.Usuario;
@@ -29,6 +33,10 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.table.DefaultTableModel;
 import negocio.UsuarioBO;
 
+/**
+ * Pantalla para administrar usuarios del sistema.
+ * Se usa para crear accesos y asignar roles como ADMIN o VENDEDOR.
+ */
 public class UsuariosForm extends JFrame {
 
     private JTextField txtBuscar;

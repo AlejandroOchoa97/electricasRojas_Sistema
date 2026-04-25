@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package presentacion;
 
 import entidad.Categoria;
@@ -38,6 +42,10 @@ import negocio.ClienteBO;
 import negocio.ProductoBO;
 import negocio.VentaBO;
 
+/**
+ * Pantalla de punto de venta.
+ * Permite buscar productos, agregarlos al carrito y confirmar la venta.
+ */
 public class VentasForm extends JFrame {
 
     private JTextField txtBuscarProducto;

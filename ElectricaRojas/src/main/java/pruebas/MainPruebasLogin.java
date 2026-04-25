@@ -1,8 +1,17 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package pruebas;
 
 import entidad.Usuario;
 import negocio.UsuarioBO;
+import persistencia.ConexionBD;
 
+/**
+ * Prueba rapida del login desde consola.
+ * Revisa que admin y vendedora puedan iniciar sesion con su rol correcto.
+ */
 public class MainPruebasLogin {
 
     public static void main(String[] args) {
@@ -32,5 +41,7 @@ public class MainPruebasLogin {
         } else {
             System.out.println("Usuario o contrasena incorrectos");
         }
+
+        ConexionBD.cerrarDriverMysql();
     }
 }

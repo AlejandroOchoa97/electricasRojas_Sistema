@@ -4,6 +4,10 @@ import entidad.Usuario;
 import java.util.List;
 import persistencia.UsuarioDAO;
 
+/**
+ * Capa de negocio para usuarios.
+ * Maneja el login y valida los datos antes de crear o modificar usuarios.
+ */
 public class UsuarioBO {
 
     private UsuarioDAO usuarioDAO = new UsuarioDAO();

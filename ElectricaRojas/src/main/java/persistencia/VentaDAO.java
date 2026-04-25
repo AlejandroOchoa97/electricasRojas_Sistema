@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author aleja
+ * DAO de ventas.
+ * Registra la venta, sus detalles y el descuento de stock en una sola transaccion.
  */
 public class VentaDAO {
 

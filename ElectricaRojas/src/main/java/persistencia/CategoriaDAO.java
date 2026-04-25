@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package persistencia;
 
 import entidad.Categoria;
@@ -7,6 +11,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO de categorias.
+ * Aqui estan las consultas SQL para guardar, listar, buscar, editar y eliminar categorias.
+ */
 public class CategoriaDAO {
 
     public boolean insertarCategoria(Categoria categoria) {

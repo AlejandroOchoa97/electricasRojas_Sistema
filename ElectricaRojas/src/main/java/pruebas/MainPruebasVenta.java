@@ -1,10 +1,20 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
 package pruebas;
 
 import entidad.DetalleVenta;
 import entidad.Venta;
 import java.util.List;
 import negocio.VentaBO;
+import persistencia.ConexionBD;
 
+/**
+ * Prueba rapida del modulo ventas desde consola.
+ * Registra una venta sencilla y luego lista las ventas guardadas.
+ */
 public class MainPruebasVenta {
 
     public static void main(String[] args) {
@@ -34,5 +44,6 @@ public class MainPruebasVenta {
         }
 
         System.out.println("\n=== PRUEBA FINALIZADA ===");
+        ConexionBD.cerrarDriverMysql();
     }
 }

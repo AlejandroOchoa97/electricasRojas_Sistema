@@ -1,7 +1,15 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package presentacion;
 
 import javax.swing.UIManager;
 
+/**
+ * Punto de entrada del sistema.
+ * Arranca la aplicacion mostrando primero la pantalla de login.
+ */
 public class MainSistema {
 
     public static void main(String[] args) {

@@ -10,8 +10,8 @@ import java.util.List;
 import persistencia.ProductoDAO;
 
 /**
- *
- * @author aleja
+ * Capa de negocio para productos.
+ * Centraliza validaciones como precio, stock y categoria antes de usar el DAO.
  */
 public class ProductoBO {
 

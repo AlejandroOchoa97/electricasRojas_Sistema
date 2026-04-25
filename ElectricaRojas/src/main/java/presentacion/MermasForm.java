@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package presentacion;
 
 import entidad.Merma;
@@ -35,6 +39,10 @@ import javax.swing.table.DefaultTableModel;
 import negocio.MermaBO;
 import negocio.ProductoBO;
 
+/**
+ * Pantalla para registrar mermas.
+ * Permite descontar productos del inventario cuando hay perdida, dano o ajuste.
+ */
 public class MermasForm extends JFrame {
 
     private JComboBox<Object> cboProducto;

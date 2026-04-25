@@ -1,8 +1,18 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
 package pruebas;
 
 import java.util.List;
 import negocio.ReporteBO;
+import persistencia.ConexionBD;
 
+/**
+ * Prueba rapida de reportes desde consola.
+ * Imprime los reportes principales para revisar que las consultas regresen datos.
+ */
 public class MainPruebasReporte {
 
     public static void main(String[] args) {
@@ -16,6 +26,7 @@ public class MainPruebasReporte {
         imprimirReporte("\n=== REPORTE MERMAS ===", reporteBO.reporteMermas());
 
         System.out.println("\n=== PRUEBA FINALIZADA ===");
+        ConexionBD.cerrarDriverMysql();
     }
 
     private static void imprimirReporte(String titulo, List<String> datos) {

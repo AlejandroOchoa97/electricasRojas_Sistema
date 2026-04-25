@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author aleja
+ * DAO de mermas.
+ * Registra perdidas de inventario y descuenta stock dentro de una transaccion.
  */
 public class MermaDAO {
 

@@ -1,3 +1,8 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
 package persistencia;
 
 import java.sql.Connection;
@@ -6,6 +11,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO de reportes.
+ * Arma las consultas que alimentan las tablas y resumenes del modulo Reportes.
+ */
 public class ReporteDAO {
 
     public List<Object[]> reporteInventarioGeneralTabla() {

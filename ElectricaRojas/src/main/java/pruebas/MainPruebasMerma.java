@@ -1,9 +1,18 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package pruebas;
 
 import entidad.Merma;
 import java.util.List;
 import negocio.MermaBO;
+import persistencia.ConexionBD;
 
+/**
+ * Prueba rapida del modulo mermas desde consola.
+ * Registra una merma y muestra el historial guardado.
+ */
 public class MainPruebasMerma {
 
     public static void main(String[] args) {
@@ -32,5 +41,6 @@ public class MainPruebasMerma {
         }
 
         System.out.println("\n=== PRUEBA FINALIZADA ===");
+        ConexionBD.cerrarDriverMysql();
     }
 }

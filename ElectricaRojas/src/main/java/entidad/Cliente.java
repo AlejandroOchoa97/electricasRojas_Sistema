@@ -1,5 +1,14 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
 package entidad;
 
+/**
+ * Guarda la informacion basica de un cliente.
+ * Se usa al registrar ventas y tambien para administrar el catalogo de clientes.
+ */
 public class Cliente {
 
     private int idCliente;

@@ -7,8 +7,8 @@ package entidad;
 import java.math.BigDecimal;
 
 /**
- *
- * @author aleja
+ * Representa un producto del inventario.
+ * Incluye sus datos principales: nombre, descripcion, precio, stock y categoria.
  */
 public class Producto {
     private int idProducto;

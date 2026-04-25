@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package presentacion;
 
 import entidad.Cliente;
@@ -28,6 +32,10 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.table.DefaultTableModel;
 import negocio.ClienteBO;
 
+/**
+ * Pantalla para administrar clientes.
+ * Muestra la lista y permite agregar, editar, buscar o eliminar registros.
+ */
 public class ClientesForm extends JFrame {
 
     private JTextField txtBuscar;

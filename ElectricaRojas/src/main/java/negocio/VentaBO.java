@@ -10,8 +10,8 @@ import java.util.List;
 import persistencia.VentaDAO;
 
 /**
- *
- * @author aleja
+ * Capa de negocio para ventas.
+ * Valida que la venta tenga datos y detalle antes de registrarla en la BD.
  */
 public class VentaBO {
 

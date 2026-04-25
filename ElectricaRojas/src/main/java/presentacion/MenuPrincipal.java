@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package presentacion;
 
 import entidad.Usuario;
@@ -20,6 +24,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+/**
+ * Menu principal del sistema.
+ * Desde aqui se entra a los modulos y se respetan los permisos segun el rol del usuario.
+ */
 public class MenuPrincipal extends JFrame {
 
     private Usuario usuario;

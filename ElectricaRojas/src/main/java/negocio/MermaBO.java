@@ -9,8 +9,8 @@ import java.util.List;
 import persistencia.MermaDAO;
 
 /**
- *
- * @author aleja
+ * Capa de negocio para mermas.
+ * Revisa que la cantidad y el motivo sean validos antes de tocar el inventario.
  */
 public class MermaBO {
 

@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package presentacion;
 
 import entidad.Categoria;
@@ -28,6 +32,10 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.table.DefaultTableModel;
 import negocio.CategoriaBO;
 
+/**
+ * Pantalla para administrar categorias de productos.
+ * Desde aqui se pueden agregar, editar, buscar y eliminar categorias.
+ */
 public class CategoriasForm extends JFrame {
 
     private JTextField txtBuscar;

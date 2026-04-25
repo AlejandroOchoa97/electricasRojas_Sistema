@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package presentacion;
 
 import java.awt.BasicStroke;
@@ -14,6 +18,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.plaf.basic.BasicButtonUI;
 
+/**
+ * Utilidad para cargar iconos usados en las pantallas.
+ * Tambien crea el boton de regreso para mantener el mismo estilo en todo el sistema.
+ */
 public class Iconos {
 
     public static Icon flechaIzquierda(Color color, int tamano) {

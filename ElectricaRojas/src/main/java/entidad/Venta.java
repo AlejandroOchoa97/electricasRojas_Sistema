@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author aleja
+ * Representa una venta completa.
+ * Guarda cliente, usuario, total y la lista de productos vendidos.
  */
 public class Venta {
 

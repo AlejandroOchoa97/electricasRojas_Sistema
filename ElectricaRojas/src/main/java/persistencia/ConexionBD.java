@@ -4,13 +4,14 @@
  */
 package persistencia;
 
+import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
- * @author aleja
+ * Clase central para abrir la conexion con MySQL.
+ * Asi todas las clases DAO usan el mismo punto de conexion.
  */
 public class ConexionBD {
 
@@ -22,5 +23,13 @@ public class ConexionBD {
 
         return DriverManager.getConnection(URL, USER, PASSWORD);
 
+    }
+
+    public static void cerrarDriverMysql() {
+        try {
+            AbandonedConnectionCleanupThread.checkedShutdown();
+        } catch (Exception e) {
+            System.out.println("Error al cerrar driver MySQL: " + e.getMessage());
+        }
     }
 }

@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package persistencia;
 
 import entidad.Cliente;
@@ -7,6 +11,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO de clientes.
+ * Se encarga de leer y modificar la tabla clientes usando PreparedStatement.
+ */
 public class ClienteDAO {
 
     public boolean insertarCliente(Cliente cliente) {

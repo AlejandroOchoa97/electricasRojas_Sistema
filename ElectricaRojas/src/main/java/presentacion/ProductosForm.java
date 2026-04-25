@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package presentacion;
 
 import entidad.Categoria;
@@ -33,6 +37,10 @@ import javax.swing.table.DefaultTableModel;
 import negocio.CategoriaBO;
 import negocio.ProductoBO;
 
+/**
+ * Pantalla para administrar productos.
+ * Muestra el inventario y abre dialogos para agregar o editar productos.
+ */
 public class ProductosForm extends JFrame {
 
     private JTextField txtBuscar;

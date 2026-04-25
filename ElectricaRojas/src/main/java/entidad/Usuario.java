@@ -5,8 +5,8 @@
 package entidad;
 
 /**
- *
- * @author aleja
+ * Representa a una persona que puede entrar al sistema.
+ * Tambien guarda el rol para saber si es administrador o vendedor.
  */
 public class Usuario {
 

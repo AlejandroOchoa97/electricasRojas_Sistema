@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author aleja
+ * DAO de productos.
+ * Contiene las consultas para el inventario: insertar, listar, buscar, editar y eliminar.
  */
 public class ProductoDAO {
 

@@ -1,10 +1,19 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package pruebas;
 
 import entidad.Categoria;
 import java.time.LocalDateTime;
 import java.util.List;
 import negocio.CategoriaBO;
+import persistencia.ConexionBD;
 
+/**
+ * Prueba rapida del modulo categorias desde consola.
+ * Sirve para comprobar que se puedan registrar y listar categorias.
+ */
 public class MainPruebasCategoria {
 
     public static void main(String[] args) {
@@ -32,5 +41,6 @@ public class MainPruebasCategoria {
         }
 
         System.out.println("\n=== PRUEBA FINALIZADA ===");
+        ConexionBD.cerrarDriverMysql();
     }
 }

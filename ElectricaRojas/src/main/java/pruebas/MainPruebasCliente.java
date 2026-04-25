@@ -4,7 +4,12 @@ import entidad.Cliente;
 import java.time.LocalDateTime;
 import java.util.List;
 import negocio.ClienteBO;
+import persistencia.ConexionBD;
 
+/**
+ * Prueba rapida del modulo clientes desde consola.
+ * Inserta, lista y busca clientes para revisar que la logica este funcionando.
+ */
 public class MainPruebasCliente {
 
     public static void main(String[] args) {
@@ -45,5 +50,6 @@ public class MainPruebasCliente {
         }
 
         System.out.println("\n=== PRUEBA FINALIZADA ===");
+        ConexionBD.cerrarDriverMysql();
     }
 }

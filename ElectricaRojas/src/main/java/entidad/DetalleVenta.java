@@ -7,8 +7,8 @@ package entidad;
 import java.math.BigDecimal;
 
 /**
- *
- * @author aleja
+ * Representa un producto dentro de una venta.
+ * Aqui se guarda la cantidad vendida, el precio usado y a que venta pertenece.
  */
 public class DetalleVenta {
 

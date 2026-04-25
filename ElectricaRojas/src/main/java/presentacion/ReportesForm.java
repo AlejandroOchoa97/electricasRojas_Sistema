@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package presentacion;
 
 import com.toedter.calendar.JDateChooser;
@@ -25,6 +29,10 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.table.DefaultTableModel;
 import negocio.ReporteBO;
 
+/**
+ * Pantalla de reportes.
+ * Permite consultar inventario, ventas, productos mas vendidos y mermas.
+ */
 public class ReportesForm extends JFrame {
 
     private JComboBox<String> cboReporte;

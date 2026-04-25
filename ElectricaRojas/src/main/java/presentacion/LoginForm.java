@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package presentacion;
 
 import entidad.Usuario;
@@ -27,6 +31,10 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import negocio.UsuarioBO;
 
+/**
+ * Pantalla de inicio de sesion.
+ * Valida usuario y contrasena para entrar al menu principal con el rol correspondiente.
+ */
 public class LoginForm extends JFrame {
 
     private JTextField txtUsuario;

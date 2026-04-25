@@ -7,8 +7,8 @@ package entidad;
 import java.time.LocalDateTime;
 
 /**
- *
- * @author aleja
+ * Guarda una perdida o ajuste de inventario.
+ * Sirve para saber que producto se desconto, cuanto y por que motivo.
  */
 public class Merma {
 
